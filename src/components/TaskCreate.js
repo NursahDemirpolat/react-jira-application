@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-function TaskCreate({onCreate}) {
+function TaskCreate({onCreate,task,taskformUpdate}) {
 
-    const [title,setTitle]= useState('');
-    const [taskDesc,setTaskDesc]= useState('');
+    const [title,setTitle]= useState(task ? task.title : ''); //task var ise (düzenleme basıldıysa) title ı ata yoksa boş string ata
+    const [taskDesc,setTaskDesc]= useState(task ? task.title : '');
 
     const handleTextInput = (event) => {
         setTitle(event.target.value) //--> inputtan alınan değer alınıp setTitle a basar
@@ -21,15 +21,31 @@ function TaskCreate({onCreate}) {
     }
 
     return ( 
-        <div className="task-create">
-            <h3>Lütfen Task Ekleyiniz!</h3>
-            <form className="form" >
-                <label className="form-label">Başlık</label>
-                <input value={title} onChange={handleTextInput} className="form-text-area"/>
-                <label className="form-label">Task Giriniz!</label>
-                <textarea value={taskDesc} onChange={handleTextArea} rows={5} className="form-text-area"/>
-                <button className="form-button" onClick={handleButton}>Oluştur</button>
-            </form>
+        <div>
+            { ' ' }
+            {taskformUpdate ? (
+            <div className="task-update">
+                <h3>Taskı Düzenleme Alanı</h3>
+                <form className="form" >
+                    <label className="form-label">Başlığı Düzenleyin!</label>
+                    <input value={title} onChange={handleTextInput} className="form-text-area"/>
+                    <label className="form-label">Taskı Düzenleyin!</label>
+                    <textarea value={taskDesc} onChange={handleTextArea} rows={5} className="form-text-area"/>
+                    <button className="update-button" onClick={handleButton}>Düzenle</button>
+                </form>
+            </div>
+            ) :(
+            <div className="task-create">
+                <h3>Lütfen Task Ekleyiniz!</h3>
+                <form className="form" >
+                    <label className="form-label">Başlık</label>
+                    <input value={title} onChange={handleTextInput} className="form-text-area"/>
+                    <label className="form-label">Task Giriniz!</label>
+                    <textarea value={taskDesc} onChange={handleTextArea} rows={5} className="form-text-area"/>
+                    <button className="form-button" onClick={handleButton}>Oluştur</button>
+                </form>
+            </div>
+            )}
         </div>
     );
 }

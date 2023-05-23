@@ -80,3 +80,22 @@
 p {
   text-align: center;
 }
+
+.task-update{
+  width: 350px;
+}
+
+.update-button {
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #800080;
+  border: 2px solid #800080;
+  font-size: 18px;
+  color: white;
+}
+
+.update-button:active{
+  background-color: #aa03aa;
+  border: 2px solid #aa03aa;
+}
