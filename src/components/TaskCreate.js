@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TaskCreate({onCreate,task,taskformUpdate}) {
+function TaskCreate({onCreate,task,taskformUpdate,onUpdate}) {
 
     const [title,setTitle]= useState(task ? task.title : ''); //task var ise (düzenleme basıldıysa) title ı ata yoksa boş string ata
     const [taskDesc,setTaskDesc]= useState(task ? task.title : '');
@@ -15,9 +15,15 @@ function TaskCreate({onCreate,task,taskformUpdate}) {
 
     const handleButton = (event) => {
         event.preventDefault(); //--> sayfayı yenileme özelliğini kapatma
-        onCreate(title,taskDesc); //---> props childen parenta gidicez TaskCreate-->App.js
+        if(taskformUpdate){ //--> güncellemeye basıldıysa (false , true döndürüyo)  
+            onUpdate(task.id,title,taskDesc);
+        }
+        else {
+            onCreate(title,taskDesc); //---> props childen parenta gidicez TaskCreate-->App.js
+        }            
         setTitle('');  //--> butona bastıktan sonra inputun içini boşaltma
         setTaskDesc(''); //--> butona bastıktan sonra textareanın içini boşaltma
+
     }
 
     return ( 
