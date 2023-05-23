@@ -18,11 +18,18 @@ function App() {
     setTasks(createdTasks); //--> task değişkenine atamış olduk
   };
 
+  const deleteTaskById = (id) => { //basılan butonun id değerini childden buraya aldık
+    const afterDeletingTasks = tasks.filter((task) => {
+      return task.id !==id; //task id si seçilen task id ye eşit olmayanlara dönücek (id arrayden çıkarıp başka bi yre kayıt etmemiz lazım bunun içinde setTask kullanıcaz)
+    })
+    setTasks(afterDeletingTasks)
+  }
+
   return (
     <div className="App">
       <TaskCreate onCreate={createTask}/> 
       <h1>Görevlerim</h1>
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks} onDelete={deleteTaskById}/>
     </div>
   );
 }

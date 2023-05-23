@@ -1,4 +1,9 @@
-function TasksShow({task}) {
+function TasksShow({task , onDelete}) {
+
+    const handleDeleteClick= () =>{
+        onDelete(task.id)
+    }
+
     console.log(task)
 
     return ( 
@@ -8,7 +13,7 @@ function TasksShow({task}) {
             <h3>Yapılacaklar</h3>
             <p>{task.taskDesc}</p>
             <div>
-                <button className="button-delete">Sil</button>
+                <button className="button-delete" onClick={handleDeleteClick}>Sil</button>
                 <button className="button-edit">Güncelle</button>
             </div>
         </div>
