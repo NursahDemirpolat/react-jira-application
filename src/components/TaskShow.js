@@ -1,22 +1,27 @@
 import { useState } from "react"
 import TaskCreate from "./TaskCreate"
 
-function TasksShow({task , onDelete , onEdit}) {
+function TasksShow({task , onDelete , onUpdate}) {
 
     const [showEdit, setShowEdit] = useState(false)
 
     const handleDeleteClick= () =>{
-        onDelete(task.id)
+        onDelete(task.id);
     }
     
     const handleEditClick= () =>{
-        setShowEdit(!showEdit) //bu değişken başlangıçta folse tıklanınca true
+        setShowEdit(!showEdit); //bu değişken başlangıçta false tıklanınca true
     }
-    
+        
+    const handleSubmit= (id,updateTitle,updateTaskDesc) =>{
+        setShowEdit(false); //güncelleme işlemi gerçekteştiği için bunu false yapmamız lazım
+        onUpdate(id,updateTitle,updateTaskDesc);
+    }
+
     return ( 
         <div className="tasklar">
             {showEdit ? (
-                <TaskCreate task={task} taskformUpdate={true}/> 
+                <TaskCreate task={task} taskformUpdate={true} onUpdate={handleSubmit} /> 
                 ): (
                 <div>
                     <h3>Göreviniz</h3>

@@ -21,15 +21,33 @@ function App() {
   const deleteTaskById = (id) => { //basılan butonun id değerini childden buraya aldık
     const afterDeletingTasks = tasks.filter((task) => {
       return task.id !== id; //task id si seçilen task id ye eşit olmayanlara dönücek (id arrayden çıkarıp başka bi yre kayıt etmemiz lazım bunun içinde setTask kullanıcaz)
-    })
+    });
     setTasks(afterDeletingTasks)
-  }
+  };
+
+  
+  const editTaskById = (id,updateTitle,updateTaskDesc) => {  //güncelleme
+    const updatedTasks = tasks.map((task) => { //arrayi tek tek dönüp elemanı bulucaz sonra yeni gelenle değiştircez (yeni arraye atamış olucaz) (dönme işlemi map)
+      if (task.id === id){
+        return {
+          id,
+          title:updateTitle,
+          taskDesc:updateTaskDesc,
+        }
+      }
+      else {
+        return task;
+      }
+    });
+    setTasks(updatedTasks)
+  };
+  
 
   return (
     <div className="App">
       <TaskCreate onCreate={createTask}/> 
       <h1>Görevlerim</h1>
-      <TaskList tasks={tasks} onDelete={deleteTaskById}/>
+      <TaskList tasks={tasks} onDelete={deleteTaskById} onUpdate={editTaskById}/>
     </div>
   );
 }
