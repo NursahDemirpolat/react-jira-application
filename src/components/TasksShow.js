@@ -1,5 +1,5 @@
-import { useState } from "react"
-import TaskCreate from "./TaskCreate"
+import { useState } from "react";
+import TaskCreate from "./TaskCreate";
 
 function TasksShow({task , onDelete , onUpdate}) {
 

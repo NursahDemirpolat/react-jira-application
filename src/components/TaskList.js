@@ -1,12 +1,12 @@
-import TasksShow from "./TaskShow";
+import TasksShow from "./TasksShow";
 
 function TaskList({ tasks , onDelete , onUpdate}) {
 
     return (
         <div className="task-list">
-            {tasks.map((task) => {   ///Array fonsiyonunu dönüyoruz map ile task ile bilgiyi alıyoruz
+            {tasks.map((task,index) => {   ///Array fonsiyonunu dönüyoruz map ile task ile bilgiyi alıyoruz
                 return (
-                    <TasksShow key={task.id} task={task} onDelete={onDelete} onUpdate={onUpdate}/>
+                    <TasksShow key={index} task={task} onDelete={onDelete} onUpdate={onUpdate}/>
                 )
             })}
         </div>  

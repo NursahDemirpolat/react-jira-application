@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TaskCreate({onCreate,task,taskformUpdate,onUpdate}) {
+function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
 
     const [title,setTitle]= useState(task ? task.title : ''); //task var ise (düzenleme basıldıysa) title ı ata yoksa boş string ata
     const [taskDesc,setTaskDesc]= useState(task ? task.title : '');
