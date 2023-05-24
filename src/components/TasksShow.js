@@ -1,12 +1,17 @@
 import { useState } from "react";
 import TaskCreate from "./TaskCreate";
+import { useContext } from "react";
+import TasksContext from "../context/Task";
 
-function TasksShow({task , onDelete , onUpdate}) {
+function TasksShow({task }) {
+
+    const {deleteTaskById,editTaskById,} = useContext(TasksContext);
 
     const [showEdit, setShowEdit] = useState(false)
 
     const handleDeleteClick= () =>{
-        onDelete(task.id);
+        // onDelete(task.id);
+        deleteTaskById(task.id)
     }
     
     const handleEditClick= () =>{
@@ -15,13 +20,14 @@ function TasksShow({task , onDelete , onUpdate}) {
         
     const handleSubmit= (id,updateTitle,updateTaskDesc) =>{
         setShowEdit(false); //güncelleme işlemi gerçekteştiği için bunu false yapmamız lazım
-        onUpdate(id,updateTitle,updateTaskDesc);
+        // onUpdate(id,updateTitle,updateTaskDesc);
+        editTaskById(task.id,updateTitle,updateTaskDesc);
     }
 
     return ( 
         <div className="tasklar">
             {showEdit ? (
-                <TaskCreate task={task} taskformUpdate={true} onUpdate={handleSubmit} /> 
+                <TaskCreate task={task} taskformUpdate={true} onUpdate={handleSubmit}/> 
                 ): (
                 <div>
                     <h3>Göreviniz</h3>

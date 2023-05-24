@@ -1,6 +1,11 @@
 import { useState } from 'react';
+import { useContext } from "react";
+import TasksContext from "../context/Task";
 
-function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
+function TaskCreate({ task, taskformUpdate,onUpdate}) {
+
+    const {createTask} = useContext(TasksContext);
+
 
     const [title,setTitle]= useState(task ? task.title : ''); //task var ise (düzenleme basıldıysa) title ı ata yoksa boş string ata
     const [taskDesc,setTaskDesc]= useState(task ? task.title : '');
@@ -17,9 +22,11 @@ function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
         event.preventDefault(); //--> sayfayı yenileme özelliğini kapatma
         if(taskformUpdate){ //--> güncellemeye basıldıysa (false , true döndürüyo)  
             onUpdate(task.id,title,taskDesc);
+            // editTaskById(task.id,title,taskDesc);
         }
         else {
-            onCreate(title,taskDesc); //---> props childen parenta gidicez TaskCreate-->App.js
+            // onCreate(title,taskDesc); //---> props childen parenta gidicez TaskCreate-->App.js
+            createTask(title,taskDesc); 
         }            
         setTitle('');  //--> butona bastıktan sonra inputun içini boşaltma
         setTaskDesc(''); //--> butona bastıktan sonra textareanın içini boşaltma
